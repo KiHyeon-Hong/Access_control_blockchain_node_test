@@ -1,0 +1,19 @@
+{
+  "name": "access_control_blockchain_node_test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KiHyeon-Hong/Access_control_blockchain_node_test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KiHyeon-Hong/Access_control_blockchain_node_test/issues"
+  },
+  "homepage": "https://github.com/KiHyeon-Hong/Access_control_blockchain_node_test#readme"
+}
