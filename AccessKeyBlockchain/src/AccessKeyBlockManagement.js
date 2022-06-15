@@ -47,7 +47,7 @@ class AccessKeyBlockManagement {
       )
       .toString('base64');
 
-    const genesisTransaction = { reqPriIp: encryptPriIp, reqNetworkKey: networkDecryptKey, reqTransactionKey: transactionDecryptKey, transactionKey: transactionDecryptKey.split('\n')[1] };
+    const genesisTransaction = { reqPriIp: keyIpAddress.address(), reqNetworkKey: networkDecryptKey, reqTransactionKey: transactionDecryptKey };
 
     let genesisBlock = {
       blockNumber: 0,
@@ -62,12 +62,18 @@ class AccessKeyBlockManagement {
     genesisBlock = keyEngine.signature(genesisBlock);
 
     let chain = JSON.parse(fs.readFileSync(__dirname + '/../files/Blockchain.json', 'utf8'));
-    chain.push(genesisBlock);
 
-    fs.writeFileSync(__dirname + '/../files/Blockchain.json', jsonFormat(chain), 'utf8');
+    if (chain.length === 0) {
+      chain.push(genesisBlock);
 
-    keyLog.writeAccessKeyLog('Info', 200, '제네시스 블록 생성 완료');
-    return true;
+      fs.writeFileSync(__dirname + '/../files/Blockchain.json', jsonFormat(chain), 'utf8');
+
+      keyLog.writeAccessKeyLog('Info', 200, '제네시스 블록 생성 완료');
+      return true;
+    } else {
+      keyLog.writeAccessKeyLog('Info', 200, '제네시스 블록이 이미 존재함');
+      return true;
+    }
   }
 
   /*
@@ -146,8 +152,8 @@ class AccessKeyBlockManagement {
 
     block = keyEngine.signature(block);
 
-    chain.push(block);
-    fs.writeFileSync(__dirname + '/../files/Blockchain.json', jsonFormat(chain), 'utf8');
+    // chain.push(block);
+    // fs.writeFileSync(__dirname + '/../files/Blockchain.json', jsonFormat(chain), 'utf8');
 
     keyLog.writeAccessKeyLog('Info', 200, '참여 블록 생성 완료');
     return block;

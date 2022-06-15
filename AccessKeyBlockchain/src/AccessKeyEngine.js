@@ -100,8 +100,8 @@ class AccessKeyEngine {
    */
   saveParticipationBlock(block) {
     let chain = JSON.parse(fs.readFileSync(__dirname + '/../files/Blockchain.json', 'utf8'));
-    chain.push(block);
-    fs.writeFileSync(__dirname + '/../files/Blockchain.json', jsonFormat(chain), 'utf8');
+    // chain.push(block);
+    // fs.writeFileSync(__dirname + '/../files/Blockchain.json', jsonFormat(chain), 'utf8');
 
     const transactionKey = JSON.parse(fs.readFileSync(__dirname + '/../files/Network.json', 'utf8'))
       .map((v1) => {

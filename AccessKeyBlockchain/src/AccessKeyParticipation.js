@@ -138,6 +138,7 @@ class AccessKeyParticipation {
     }
 
     network.push(networkJson);
+
     fs.writeFileSync(__dirname + '/../files/Network.json', jsonFormat(network), 'utf8');
     return networkJson;
   }
