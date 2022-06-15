@@ -576,15 +576,26 @@ class AccessKeyBlockManagement {
       return JSON.parse(v);
     });
 
+    let blockNum = 0;
+
     try {
       const goodChain = results
         .filter((v) => {
           if (v.error !== null) return false;
-          return keyEngine.checkChainIntegrity(JSON.parse(v.body));
+
+          let tmp = keyEngine.checkChainIntegrity(JSON.parse(v.body));
+
+          //
+          console.log(tmp[0]);
+          blockNum = tmp[1];
+
+          return tmp === true ? true : false;
         })
         .sort((a, b) => {
           return b.body.length - a.body.length;
         })[0].body;
+
+      if (blockNum !== undefined) console.log(JSON.parse(goodChain)[blockNum].transaction.accessKey);
 
       fs.writeFileSync(__dirname + '/../files/Blockchain.json', jsonFormat(JSON.parse(goodChain)), 'utf8');
 

@@ -199,7 +199,7 @@ class AccessKeyEngine {
           Buffer.from(chain[i].encryValue, 'base64')
         );
 
-        if (encryData !== decryptedData.toString()) return false;
+        if (encryData !== decryptedData.toString()) return [chain[i].transaction.accessKey, i];
       }
 
       keyLog.writeAccessKeyLog('Info', 200, `블록체인 무결성 검증 성공`);
