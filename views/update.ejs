@@ -3,6 +3,12 @@
     <title>출입키 위변조 복구율 모듈</title>
   </head>
   <body>
-    <form action="/change" method="get"></form>
+    <form action="/change" method="get">
+      <textarea name="orig" readonly><%= chain.data.transaction.accessKey %></textarea>
+      <textarea name="change"><%= chain.error %></textarea>
+
+      <input type="hidden" id="accessKey" name="accessKey" value=<%= chain.data.blockNumber %> >
+      <input type="submit" value="위변조 시도" />
+    </form>
   </body>
 </html>

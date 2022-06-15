@@ -20,6 +20,16 @@ let error = [
   'ngd5c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
   'wsz5c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
   'noo5c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
+  '9285c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
+  'ssz5c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
+  '3f35c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
+  'aps5c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
+  'bgs5c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
+  '60d5c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
+  'cxs5c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
+  'ngd5c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
+  'wsz5c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
+  'noo5c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
 ];
 
 fs.writeFileSync(__dirname + '/files/accessKey.log', '', 'utf8');
@@ -44,7 +54,7 @@ rl.on('line', (data) => {
 
   fs.writeFileSync(__dirname + '/AccessKeyBlockchain/files/Blockchain.json', jsonFormat(chain), 'utf8');
 
-  if (cnt === 9) {
+  if (cnt === 19) {
     rl.close();
   }
 
