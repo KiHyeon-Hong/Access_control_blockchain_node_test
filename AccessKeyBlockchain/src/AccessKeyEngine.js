@@ -1,6 +1,7 @@
 const fs = require('fs');
 const crypto = require('crypto');
 const sha256 = require('sha256');
+const jsonFormat = require('json-format');
 
 const { AccessKeyManagement } = require(__dirname + '/AccessKeyManagement.js');
 const { AccessKeyLog } = require(__dirname + '/AccessKeyLog.js');
@@ -100,7 +101,7 @@ class AccessKeyEngine {
   saveParticipationBlock(block) {
     let chain = JSON.parse(fs.readFileSync(__dirname + '/../files/Blockchain.json', 'utf8'));
     chain.push(block);
-    fs.writeFileSync(__dirname + '/../files/Blockchain.json', JSON.stringify(chain), 'utf8');
+    fs.writeFileSync(__dirname + '/../files/Blockchain.json', jsonFormat(chain), 'utf8');
 
     const transactionKey = JSON.parse(fs.readFileSync(__dirname + '/../files/Network.json', 'utf8'))
       .map((v1) => {
@@ -125,7 +126,7 @@ class AccessKeyEngine {
     for (let i = 0; i < network.length; i++) {
       if (network[i].networkKey === networkJson.networkKey || network[i].transactionKey === networkJson.transactionKey) {
         network[i] = networkJson;
-        fs.writeFileSync(__dirname + '/../files/Network.json', JSON.stringify(network), 'utf8');
+        fs.writeFileSync(__dirname + '/../files/Network.json', jsonFormat(network), 'utf8');
 
         keyLog.writeAccessKeyLog('Info', 200, `참여 요청 블록 저장 완료`);
 
@@ -134,7 +135,7 @@ class AccessKeyEngine {
     }
 
     network.push(networkJson);
-    fs.writeFileSync(__dirname + '/../files/Network.json', JSON.stringify(network), 'utf8');
+    fs.writeFileSync(__dirname + '/../files/Network.json', jsonFormat(network), 'utf8');
 
     keyLog.writeAccessKeyLog('Info', 200, `참여 요청 블록 저장 완료`);
 
@@ -152,7 +153,7 @@ class AccessKeyEngine {
   saveAccessKeyBlock(block) {
     let chain = JSON.parse(fs.readFileSync(__dirname + '/../files/Blockchain.json', 'utf8'));
     chain.push(block);
-    fs.writeFileSync(__dirname + '/../files/Blockchain.json', JSON.stringify(chain), 'utf8');
+    fs.writeFileSync(__dirname + '/../files/Blockchain.json', jsonFormat(chain), 'utf8');
 
     keyLog.writeAccessKeyLog('Info', 200, `출입키 블록 저장 완료`);
 

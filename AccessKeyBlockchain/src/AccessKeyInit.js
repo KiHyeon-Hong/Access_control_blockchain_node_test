@@ -1,5 +1,6 @@
 const fs = require('fs');
 const crypto = require('crypto');
+const jsonFormat = require('json-format');
 
 const { AccessKeyLog } = require(__dirname + '/AccessKeyLog.js');
 const { AccessKeyIpAddress } = require(__dirname + '/AccessKeyIpAddress.js');

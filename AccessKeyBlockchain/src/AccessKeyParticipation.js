@@ -1,6 +1,7 @@
 const fs = require('fs');
 const crypto = require('crypto');
 const request = require('request');
+const jsonFormat = require('json-format');
 
 const { AccessKeyManagement } = require(__dirname + '/AccessKeyManagement.js');
 const { AccessKeyLog } = require(__dirname + '/AccessKeyLog.js');
@@ -131,13 +132,13 @@ class AccessKeyParticipation {
     for (let i = 0; i < network.length; i++) {
       if (network[i].networkKey === networkJson.networkKey || network[i].transactionKey === networkJson.transactionKey) {
         network[i] = networkJson;
-        fs.writeFileSync(__dirname + '/../files/Network.json', JSON.stringify(network), 'utf8');
+        fs.writeFileSync(__dirname + '/../files/Network.json', jsonFormat(network), 'utf8');
         return networkJson;
       }
     }
 
     network.push(networkJson);
-    fs.writeFileSync(__dirname + '/../files/Network.json', JSON.stringify(network), 'utf8');
+    fs.writeFileSync(__dirname + '/../files/Network.json', jsonFormat(network), 'utf8');
     return networkJson;
   }
 
@@ -183,7 +184,7 @@ class AccessKeyParticipation {
       }
     }
 
-    fs.writeFileSync(__dirname + '/../files/Network.json', JSON.stringify(network), 'utf8');
+    fs.writeFileSync(__dirname + '/../files/Network.json', jsonFormat(network), 'utf8');
     return true;
   }
 }

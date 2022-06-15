@@ -1,6 +1,7 @@
 const fs = require('fs');
 const crypto = require('crypto');
 const request = require('request');
+const jsonFormat = require('json-format');
 
 const { AccessKeyEngine } = require(__dirname + '/AccessKeyEngine.js');
 const { AccessKeyManagement } = require(__dirname + '/AccessKeyManagement.js');
@@ -63,7 +64,7 @@ class AccessKeyBlockManagement {
     let chain = JSON.parse(fs.readFileSync(__dirname + '/../files/Blockchain.json', 'utf8'));
     chain.push(genesisBlock);
 
-    fs.writeFileSync(__dirname + '/../files/Blockchain.json', JSON.stringify(chain), 'utf8');
+    fs.writeFileSync(__dirname + '/../files/Blockchain.json', jsonFormat(chain), 'utf8');
 
     keyLog.writeAccessKeyLog('Info', 200, '제네시스 블록 생성 완료');
     return true;
@@ -100,7 +101,7 @@ class AccessKeyBlockManagement {
       const blockResult = JSON.parse(await consensusRequest(network));
 
       if (blockResult.error === null) {
-        fs.writeFileSync(__dirname + '/../files/Blockchain.json', JSON.stringify(JSON.parse(blockResult.body)), 'utf8');
+        fs.writeFileSync(__dirname + '/../files/Blockchain.json', jsonFormat(JSON.parse(blockResult.body)), 'utf8');
 
         keyLog.writeAccessKeyLog('Info', 200, '출입키 블록체인 받아오기 완료');
         break;
@@ -146,7 +147,7 @@ class AccessKeyBlockManagement {
     block = keyEngine.signature(block);
 
     chain.push(block);
-    fs.writeFileSync(__dirname + '/../files/Blockchain.json', JSON.stringify(chain), 'utf8');
+    fs.writeFileSync(__dirname + '/../files/Blockchain.json', jsonFormat(chain), 'utf8');
 
     keyLog.writeAccessKeyLog('Info', 200, '참여 블록 생성 완료');
     return block;
@@ -251,7 +252,7 @@ class AccessKeyBlockManagement {
     block = keyEngine.signature(block);
 
     chain.push(block);
-    fs.writeFileSync(__dirname + '/../files/Blockchain.json', JSON.stringify(chain), 'utf8');
+    fs.writeFileSync(__dirname + '/../files/Blockchain.json', jsonFormat(chain), 'utf8');
 
     keyLog.writeAccessKeyLog('Info', 200, `출입키 블록 생성 완료`);
 
@@ -591,7 +592,7 @@ class AccessKeyBlockManagement {
           return b.body.length - a.body.length;
         })[0].body;
 
-      fs.writeFileSync(__dirname + '/../files/Blockchain.json', goodChain, 'utf8');
+      fs.writeFileSync(__dirname + '/../files/Blockchain.json', jsonFormat(JSON.parse(goodChain)), 'utf8');
 
       keyLog.writeAccessKeyLog('Info', 200, `블록체인 무결성 유지 완료`);
 

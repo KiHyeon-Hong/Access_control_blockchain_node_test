@@ -1,4 +1,5 @@
 const ip = require('ip');
+const jsonFormat = require('json-format');
 
 const { AccessKeyLog } = require(__dirname + '/AccessKeyLog.js');
 
