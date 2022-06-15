@@ -17,7 +17,7 @@ class AccessKeyLog {
    */
   writeAccessKeyLog(state, code, data) {
     // fs.appendFileSync(__dirname + '/../files/Blockchain.log', `${new Date().toLocaleString()} [${state}] ${code}: ${data}\n`, 'utf8');
-    console.log(`${new Date().toLocaleString()} [${state}] ${code}: ${data}`);
+    // console.log(`${new Date().toLocaleString()} [${state}] ${code}: ${data}`);
 
     return true;
   }

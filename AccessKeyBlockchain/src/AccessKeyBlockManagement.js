@@ -586,7 +586,10 @@ class AccessKeyBlockManagement {
           let tmp = keyEngine.checkChainIntegrity(JSON.parse(v.body));
 
           //
-          console.log(tmp[0]);
+          if (tmp !== true) {
+            console.log('위변조 감지 출입키');
+            console.log(tmp[0]);
+          }
           blockNum = tmp[1];
 
           return tmp === true ? true : false;
@@ -595,7 +598,11 @@ class AccessKeyBlockManagement {
           return b.body.length - a.body.length;
         })[0].body;
 
-      if (blockNum !== undefined) console.log(JSON.parse(goodChain)[blockNum].transaction.accessKey);
+      if (blockNum !== undefined) {
+        console.log('복구된 출입키');
+        console.log(JSON.parse(goodChain)[blockNum].transaction.accessKey);
+        console.log();
+      }
 
       fs.writeFileSync(__dirname + '/../files/Blockchain.json', jsonFormat(JSON.parse(goodChain)), 'utf8');
 
