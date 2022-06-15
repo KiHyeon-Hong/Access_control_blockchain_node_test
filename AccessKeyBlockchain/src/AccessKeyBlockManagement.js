@@ -331,7 +331,7 @@ class AccessKeyBlockManagement {
    * @param: doorId: String, accessKey: String
    * @return: Boolean
    */
-  async reqReliabilityVerification(doorId, accessKey) {
+  async reqReliabilityVerification(accessKey) {
     let networks = JSON.parse(fs.readFileSync(__dirname + '/../files/Network.json', 'utf8')).map((v) => {
       return v.priIp;
     });
@@ -345,7 +345,6 @@ class AccessKeyBlockManagement {
           uri: `http://${network}:${config.port}/reliabilityVerification`,
           method: 'POST',
           form: {
-            doorId: doorId,
             accessKey: accessKey,
           },
         };
@@ -390,7 +389,7 @@ class AccessKeyBlockManagement {
    * @param: doorId: String, accessKey: String
    * @return: blockNumber: Number
    */
-  reliabilityVerification(doorId, accessKey) {
+  reliabilityVerification(accessKey) {
     const networkKey = keyManagement.getNetworkEncrptKey();
     const transactionKey = keyManagement.getTransactionDecryptKey();
 
@@ -408,30 +407,19 @@ class AccessKeyBlockManagement {
 
     for (let i = 0; i < chain.length; i++) {
       if (keys[chain[i].transactionKey] !== undefined) {
-        if (chain[i].transaction.doorId !== undefined) {
-          const decryptedDoorId = crypto
-            .privateDecrypt(
-              {
-                key: keys[chain[i].transactionKey],
-                padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
-                oaepHash: 'sha256',
-              },
-              Buffer.from(chain[i].transaction.doorId, 'base64')
-            )
-            .toString();
+        if (chain[i].transaction.accessKey !== undefined) {
+          // const decryptedAccessKey = crypto
+          //   .privateDecrypt(
+          //     {
+          //       key: keys[chain[i].transactionKey],
+          //       padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
+          //       oaepHash: 'sha256',
+          //     },
+          //     Buffer.from(chain[i].transaction.accessKey, 'base64')
+          //   )
+          //   .toString();
 
-          const decryptedAccessKey = crypto
-            .privateDecrypt(
-              {
-                key: keys[chain[i].transactionKey],
-                padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
-                oaepHash: 'sha256',
-              },
-              Buffer.from(chain[i].transaction.accessKey, 'base64')
-            )
-            .toString();
-
-          if (decryptedDoorId === doorId && decryptedAccessKey === accessKey) {
+          if (chain[i].transaction.accessKey === accessKey) {
             keyLog.writeAccessKeyLog('Info', 200, `출입키 무결성 검증 성공`);
 
             return chain[i].blockNumber;

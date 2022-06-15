@@ -67,35 +67,14 @@ app.post('/reqParticipation', async (req, res, next) => {
  * 출입키 트랜잭션 저장 요청 API
  */
 app.post('/saveTransaction', (req, res, next) => {
-  res.send(blockchain.saveTransaction(req.body.doorId, req.body.accessKey));
+  res.send(blockchain.saveTransaction(req.body.accessKey));
 });
 
 /*
  * 출입키 트랜잭션 신뢰성 검증 요청 API
  */
 app.post('/reqReliabilityVerification', async (req, res, next) => {
-  res.json(await blockchain.reqReliabilityVerification(req.body.doorId, req.body.accessKey));
-});
-
-/*
- * 출입키 검색 요청 API
- */
-app.post('/reqKey', (req, res, next) => {
-  res.json(blockchain.reqKey(req.body.accessKey));
-});
-
-/*
- * 출입키 도어락 ID 검색 요청 API
- */
-app.post('/reqId', (req, res, next) => {
-  res.json(blockchain.reqId(req.body.doorId));
-});
-
-/*
- * 출입키 블록체인 로그 요청 API
- */
-app.get('/blockLog', (req, res, next) => {
-  res.json(blockchain.blockLog());
+  res.json(await blockchain.reqReliabilityVerification(req.body.accessKey));
 });
 
 /*
@@ -156,7 +135,7 @@ app.get('/networkIntegrity', (req, res, next) => {
  * 출입키 트랜잭션 신뢰성 검증 API
  */
 app.post('/reliabilityVerification', (req, res, next) => {
-  res.json(blockchain.reliabilityVerification(req.body.doorId, req.body.accessKey));
+  res.json(blockchain.reliabilityVerification(req.body.accessKey));
 });
 
 app.listen(65006, () => {

@@ -250,8 +250,8 @@ class AccessKeyBlockchain {
    * @param: doorId: String, accessKey: String
    * @return: {blockNumber: Number, timestamp: Number, transactionKey: String, encryValue: String, previousEncryValue: String, transaction: param}: Json
    */
-  saveTransaction(doorId, accessKey) {
-    const pendingTransaction = keyTransactionManagement.createAccessKeyTransaction(doorId, accessKey);
+  saveTransaction(accessKey) {
+    const pendingTransaction = keyTransactionManagement.createAccessKeyTransaction(accessKey);
     const block = keyBlockManagement.createAccessKeyBlock(pendingTransaction);
     keyBlockManagement.deployAccessKeyBlock(block);
 
@@ -279,8 +279,8 @@ class AccessKeyBlockchain {
    * @param: doorId: String, accessKey: String
    * @return: Boolean
    */
-  async reqReliabilityVerification(doorId, accessKey) {
-    return await keyBlockManagement.reqReliabilityVerification(doorId, accessKey);
+  async reqReliabilityVerification(accessKey) {
+    return await keyBlockManagement.reqReliabilityVerification(accessKey);
   }
 
   /*
@@ -292,8 +292,8 @@ class AccessKeyBlockchain {
    * @param: doorId: String, accessKey: String
    * @return: blockNumber: Number
    */
-  reliabilityVerification(doorId, accessKey) {
-    return keyBlockManagement.reliabilityVerification(doorId, accessKey);
+  reliabilityVerification(accessKey) {
+    return keyBlockManagement.reliabilityVerification(accessKey);
   }
 
   /*

@@ -51,20 +51,9 @@ class AccessKeyTransactionManagement {
    * @param: doorId: String, accessKey: String
    * @return: {doorId: String, accessKey: String, transactionKey: String}: Json
    */
-  createAccessKeyTransaction(doorId, accessKey) {
+  createAccessKeyTransaction(accessKey) {
     const transactionEncryptKey = keyManagement.getTransactionEncryptKey();
     const transactionDecryptKey = keyManagement.getTransactionDecryptKey();
-
-    const encryptDoorId = crypto
-      .publicEncrypt(
-        {
-          key: transactionEncryptKey,
-          padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
-          oaepHash: 'sha256',
-        },
-        doorId
-      )
-      .toString('base64');
 
     const encryptAccessKey = crypto
       .publicEncrypt(
@@ -77,7 +66,7 @@ class AccessKeyTransactionManagement {
       )
       .toString('base64');
 
-    return { doorId: encryptDoorId, accessKey: encryptAccessKey, transactionKey: transactionDecryptKey.split('\n')[1] };
+    return { accessKey: accessKey };
   }
 }
 
