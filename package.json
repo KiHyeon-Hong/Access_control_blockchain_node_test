@@ -18,11 +18,12 @@
   "homepage": "https://github.com/KiHyeon-Hong/Access_control_blockchain_node_test#readme",
   "dependencies": {
     "body-parser": "^1.19.2",
+    "ejs": "^3.1.8",
     "express": "^4.17.3",
-    "request": "^2.88.2",
     "ip": "^1.1.5",
+    "json-format": "^1.0.1",
     "public-ip": "^5.0.0",
-    "sha256": "^0.2.0",
-    "json-format": "^1.0.1"
+    "request": "^2.88.2",
+    "sha256": "^0.2.0"
   }
 }

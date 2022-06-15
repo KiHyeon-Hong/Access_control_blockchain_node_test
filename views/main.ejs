@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <title>출입키 위변조 복구율 모듈</title>
+  </head>
+  <body>
+    <% for(var i = 1; i < chain.data.length; i++){ %>
+    <form action="/update" method="get">
+      <h4>시험 출입키 데이터 <%= i %></h4>
+      <div><%= chain.data[i].transaction.accessKey %></div>
+      <input type="hidden" id="accessKey" name="accessKey" value=<%= i %> >
+      <input type="submit" value="위변조 시도" />
+    </form>
+    <% } %>
+  </body>
+</html>

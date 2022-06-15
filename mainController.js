@@ -1,6 +1,8 @@
 const express = require('express');
 const request = require('request');
 const bodyParser = require('body-parser');
+const jsonFormat = require('json-format');
+const fs = require('fs');
 
 const app = express();
 app.use(express.json());
@@ -136,6 +138,10 @@ app.get('/networkIntegrity', (req, res, next) => {
  */
 app.post('/reliabilityVerification', (req, res, next) => {
   res.json(blockchain.reliabilityVerification(req.body.accessKey));
+});
+
+app.get('/getBlockchain', (req, res, next) => {
+  res.json(JSON.parse(fs.readFileSync(__dirname + '/AccessKeyBlockchain/files/Blockchain.json', 'utf8')));
 });
 
 app.listen(65006, () => {
