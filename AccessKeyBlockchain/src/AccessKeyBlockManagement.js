@@ -589,6 +589,9 @@ class AccessKeyBlockManagement {
           if (tmp !== true) {
             console.log('위변조 감지 출입키');
             console.log(tmp[0]);
+
+            fs.appendFileSync(__dirname + '/../../files/accessKey.log', `위변조 감지 출입키\n`, 'utf8');
+            fs.appendFileSync(__dirname + '/../../files/accessKey.log', `${tmp[0]}\n`, 'utf8');
           }
           blockNum = tmp[1];
 
@@ -602,6 +605,9 @@ class AccessKeyBlockManagement {
         console.log('복구된 출입키');
         console.log(JSON.parse(goodChain)[blockNum].transaction.accessKey);
         console.log();
+
+        fs.appendFileSync(__dirname + '/../../files/accessKey.log', `복구된 출입키\n`, 'utf8');
+        fs.appendFileSync(__dirname + '/../../files/accessKey.log', `${JSON.parse(goodChain)[blockNum].transaction.accessKey}\n\n`, 'utf8');
       }
 
       fs.writeFileSync(__dirname + '/../files/Blockchain.json', jsonFormat(JSON.parse(goodChain)), 'utf8');
