@@ -147,11 +147,4 @@ app.get('/getBlockchain', (req, res, next) => {
 app.listen(65006, () => {
   blockchain.accessKeyInit();
   console.log(`출입키 블록체인 네트워크가 ${blockchain.address()}:65006에서 동작 중...`);
-
-  // 일정 시간마다 블록체인 네트워크에서 가장 신뢰할 수 있는 블록체인을 받아온다.
-  const blockIntegrity = async () => {
-    await blockchain.reqBlockIntegrity();
-    setTimeout(blockIntegrity, blockchain.getBlockIntegrityTime());
-  };
-  setTimeout(blockIntegrity, blockchain.getBlockIntegrityTime());
 });
