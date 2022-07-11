@@ -1,1 +1,1 @@
-{ "port": 65006, "networkIntegrity": 10000, "blockIntegrity": 10000 }
+{ "port": 65006, "networkIntegrity": 3000, "blockIntegrity": 3000 }

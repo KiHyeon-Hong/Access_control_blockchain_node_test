@@ -11,7 +11,7 @@ app.use(express.static(__dirname + '/'));
 
 app.set('view engine', 'ejs');
 
-fs.writeFileSync(__dirname + '/files/AccessKey.log', '', 'utf8');
+// fs.writeFileSync(__dirname + '/files/AccessKey.log', '', 'utf8');
 
 let date = new Date();
 
@@ -42,7 +42,7 @@ for (let i = 0; i < error.length; i++) {
   error[i] = error[i].split('\r')[0];
 }
 
-let tot = 100;
+let tot = 10;
 let cnt = 0;
 
 app.get('/', function (req, res) {
@@ -89,7 +89,43 @@ app.get('/change', function (req, res) {
 
   cnt++;
 
-  res.redirect('/');
+  if (cnt === tot) {
+    while (true) {
+      let results = fs.readFileSync(__dirname + '/files/AccessKey.log', 'utf8').split('\n');
+
+      if (results[results.length - 4] === '복구된 출입키') {
+        break;
+      }
+    }
+
+    res.redirect('/results');
+  } else {
+    res.redirect('/');
+  }
+});
+
+app.get('/results', function (req, res) {
+  let results = fs.readFileSync(__dirname + '/files/AccessKey.log', 'utf8').split('\n');
+
+  let success = 0;
+  let fail = 0;
+
+  for (let i = 0; i < results.length; i++) {
+    if (results[i] === '시험 출입키 데이터') {
+      if (results[i + 1] === results[i + 7]) {
+        success++;
+      } else {
+        fail++;
+      }
+    }
+  }
+
+  res.render('result', {
+    tot: tot,
+    success: success,
+    fail: fail,
+    rank: (success / (success + fail)) * 100,
+  });
 });
 
 app.listen(65001, () => {

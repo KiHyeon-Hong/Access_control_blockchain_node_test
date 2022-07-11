@@ -608,9 +608,11 @@ class AccessKeyBlockManagement {
 
         fs.appendFileSync(__dirname + '/../../files/AccessKey.log', `복구된 출입키\n`, 'utf8');
         fs.appendFileSync(__dirname + '/../../files/AccessKey.log', `${JSON.parse(goodChain)[blockNum].transaction.accessKey}\n\n`, 'utf8');
+
+        fs.writeFileSync(__dirname + '/../files/Blockchain.json', jsonFormat(JSON.parse(goodChain)), 'utf8');
       }
 
-      fs.writeFileSync(__dirname + '/../files/Blockchain.json', jsonFormat(JSON.parse(goodChain)), 'utf8');
+      // fs.writeFileSync(__dirname + '/../files/Blockchain.json', jsonFormat(JSON.parse(goodChain)), 'utf8');
 
       keyLog.writeAccessKeyLog('Info', 200, `블록체인 무결성 유지 완료`);
 
