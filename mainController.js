@@ -53,7 +53,7 @@ app.post('/reqParticipation', async (req, res, next) => {
 
         if (networks.length === 0) {
           // 블록체인 네트워크의 첫 노드일 경우, 제네시스 블록을 생성한다.
-          // blockchain.createGenesisBlock();
+          blockchain.createGenesisBlock();
         } else {
           // 기존의 블록체인 네트워크가 존재할 경우, 이미 존재하는 블록체인을 받아온다.
           await blockchain.consensusBlock();

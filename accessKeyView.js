@@ -13,28 +13,18 @@ app.set('view engine', 'ejs');
 
 fs.writeFileSync(__dirname + '/files/accessKey.log', '', 'utf8');
 
-let error = [
-  '9285c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
-  'ssz5c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
-  '3f35c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
-  'aps5c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
-  'bgs5c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
-  '60d5c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
-  'cxs5c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
-  'ngd5c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
-  'wsz5c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
-  'noo5c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
-  '9285c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
-  'ssz5c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
-  '3f35c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
-  'aps5c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
-  'bgs5c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
-  '60d5c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
-  'cxs5c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
-  'ngd5c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
-  'wsz5c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
-  'noo5c202e320d0bf9bb2c6e2c7cf380a6f7de5d392509fee260b809c893ff2f9',
-];
+let error = fs
+  .readFileSync(__dirname + '/files/ForgedAccessKey.txt', 'utf8')
+  .split('\n')
+  .map((v) => {
+    return v.split(' ')[1];
+  });
+
+for (let i = 0; i < error.length; i++) {
+  error[i] = error[i].split('\r')[0];
+}
+
+console.log(error);
 
 app.get('/', function (req, res) {
   request.get(`http://localhost:65006/getBlockchain`, (error, response, body) => {
