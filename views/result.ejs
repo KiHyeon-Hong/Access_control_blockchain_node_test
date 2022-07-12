@@ -3,9 +3,12 @@
     <title>출입키 위변조 복구율 모듈</title>
   </head>
   <body>
-    <div><%= tot %></div>
-    <div><%= success %></div>
-    <div><%= fail %></div>
-    <div><%= rank %></div>
+    <form action="/finish" method="get">
+      <div><%= tot %></div>
+      <div><%= success %></div>
+      <div><%= fail %></div>
+      <div><%= rank %></div>
+      <input type="submit" value="출입키 위변조 프로그램 종료" />
+    </form>
   </body>
 </html>

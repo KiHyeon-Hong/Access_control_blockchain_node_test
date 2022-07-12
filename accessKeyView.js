@@ -11,7 +11,7 @@ app.use(express.static(__dirname + '/'));
 
 app.set('view engine', 'ejs');
 
-// fs.writeFileSync(__dirname + '/files/AccessKey.log', '', 'utf8');
+fs.writeFileSync(__dirname + '/files/AccessKey.log', '', 'utf8');
 
 let date = new Date();
 
@@ -120,12 +120,29 @@ app.get('/results', function (req, res) {
     }
   }
 
+  fs.appendFileSync(__dirname + '/files/AccessKey.log', `===============================================================\n`, 'utf8');
+  fs.appendFileSync(__dirname + '/files/AccessKey.log', `총 데이터: ${tot}개\n`, 'utf8');
+  fs.appendFileSync(__dirname + '/files/AccessKey.log', `성공: ${success}회\n`, 'utf8');
+  fs.appendFileSync(__dirname + '/files/AccessKey.log', `실패: ${fail}회\n`, 'utf8');
+  fs.appendFileSync(__dirname + '/files/AccessKey.log', `성공률: ${(success / (success + fail)) * 100}%\n\n`, 'utf8');
+
+  let date = new Date();
+  fs.appendFileSync(__dirname + '/files/AccessKey.log', `종료 시간: ${date}`, 'utf8');
+
   res.render('result', {
     tot: tot,
     success: success,
     fail: fail,
     rank: (success / (success + fail)) * 100,
   });
+});
+
+app.get('/finish', function (req, res) {
+  res.render('finish', {});
+
+  setTimeout(() => {
+    process.exit(1);
+  }, 5000);
 });
 
 app.listen(65001, () => {

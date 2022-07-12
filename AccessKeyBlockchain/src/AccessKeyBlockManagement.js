@@ -13,6 +13,9 @@ const keyManagement = new AccessKeyManagement();
 const keyLog = new AccessKeyLog();
 const keyIpAddress = new AccessKeyIpAddress();
 
+let cnt = 0;
+let tot = 10;
+
 /*
  * AccessKeyBlockManagement
  * 출입키 블록체인 블록 관리 모듈
@@ -585,8 +588,11 @@ class AccessKeyBlockManagement {
 
           let tmp = keyEngine.checkChainIntegrity(JSON.parse(v.body));
 
-          //
+          let date = new Date();
+
           if (tmp !== true) {
+            console.log(`===============================================================`);
+            console.log(`출입키 위변조 복구율 시험 ${cnt + 1}/${tot} (${date})\n`);
             console.log('위변조 감지 출입키');
             console.log(tmp[0]);
 
@@ -610,11 +616,19 @@ class AccessKeyBlockManagement {
         fs.appendFileSync(__dirname + '/../../files/AccessKey.log', `${JSON.parse(goodChain)[blockNum].transaction.accessKey}\n\n`, 'utf8');
 
         fs.writeFileSync(__dirname + '/../files/Blockchain.json', jsonFormat(JSON.parse(goodChain)), 'utf8');
+
+        cnt++;
       }
 
       // fs.writeFileSync(__dirname + '/../files/Blockchain.json', jsonFormat(JSON.parse(goodChain)), 'utf8');
 
       keyLog.writeAccessKeyLog('Info', 200, `블록체인 무결성 유지 완료`);
+
+      if (cnt === tot) {
+        setTimeout(() => {
+          process.exit(1);
+        }, 5000);
+      }
 
       return true;
     } catch (e) {
