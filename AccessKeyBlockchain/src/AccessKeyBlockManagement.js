@@ -14,7 +14,7 @@ const keyLog = new AccessKeyLog();
 const keyIpAddress = new AccessKeyIpAddress();
 
 let cnt = 0;
-let tot = 10;
+let tot = 100;
 
 /*
  * AccessKeyBlockManagement
