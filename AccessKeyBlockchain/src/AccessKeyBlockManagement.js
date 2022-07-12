@@ -64,12 +64,12 @@ class AccessKeyBlockManagement {
 
     genesisBlock = keyEngine.signature(genesisBlock);
 
-    let chain = JSON.parse(fs.readFileSync(__dirname + '/../files/Blockchain.json', 'utf8'));
+    let chain = JSON.parse(fs.readFileSync(__dirname + '/../../files/AccessKey.json', 'utf8'));
 
     if (chain.length === 0) {
       chain.push(genesisBlock);
 
-      fs.writeFileSync(__dirname + '/../files/Blockchain.json', jsonFormat(chain), 'utf8');
+      fs.writeFileSync(__dirname + '/../../files/AccessKey.json', jsonFormat(chain), 'utf8');
 
       keyLog.writeAccessKeyLog('Info', 200, '제네시스 블록 생성 완료');
       return true;
@@ -110,7 +110,7 @@ class AccessKeyBlockManagement {
       const blockResult = JSON.parse(await consensusRequest(network));
 
       if (blockResult.error === null) {
-        fs.writeFileSync(__dirname + '/../files/Blockchain.json', jsonFormat(JSON.parse(blockResult.body)), 'utf8');
+        fs.writeFileSync(__dirname + '/../../files/AccessKey.json', jsonFormat(JSON.parse(blockResult.body)), 'utf8');
 
         keyLog.writeAccessKeyLog('Info', 200, '출입키 블록체인 받아오기 완료');
         break;
@@ -128,7 +128,7 @@ class AccessKeyBlockManagement {
    */
   blockIntegrity() {
     keyLog.writeAccessKeyLog('Info', 200, '출입키 블록체인 배포 완료');
-    return JSON.parse(fs.readFileSync(__dirname + '/../files/Blockchain.json', 'utf8'));
+    return JSON.parse(fs.readFileSync(__dirname + '/../../files/AccessKey.json', 'utf8'));
   }
 
   /*
@@ -142,7 +142,7 @@ class AccessKeyBlockManagement {
   createParticipationBlock(pendingTransaction) {
     const transactionDecryptKey = keyManagement.getTransactionDecryptKey();
 
-    let chain = JSON.parse(fs.readFileSync(__dirname + '/../files/Blockchain.json', 'utf8'));
+    let chain = JSON.parse(fs.readFileSync(__dirname + '/../../files/AccessKey.json', 'utf8'));
 
     let block = {
       blockNumber: chain.length,
@@ -247,7 +247,7 @@ class AccessKeyBlockManagement {
   createAccessKeyBlock(pendingTransaction) {
     const transactionDecryptKey = keyManagement.getTransactionDecryptKey();
 
-    let chain = JSON.parse(fs.readFileSync(__dirname + '/../files/Blockchain.json', 'utf8'));
+    let chain = JSON.parse(fs.readFileSync(__dirname + '/../../files/AccessKey.json', 'utf8'));
 
     let block = {
       blockNumber: chain.length,
@@ -261,7 +261,7 @@ class AccessKeyBlockManagement {
     block = keyEngine.signature(block);
 
     chain.push(block);
-    fs.writeFileSync(__dirname + '/../files/Blockchain.json', jsonFormat(chain), 'utf8');
+    fs.writeFileSync(__dirname + '/../../files/AccessKey.json', jsonFormat(chain), 'utf8');
 
     keyLog.writeAccessKeyLog('Info', 200, `출입키 블록 생성 완료`);
 
@@ -406,7 +406,7 @@ class AccessKeyBlockManagement {
       keys[v.transactionKey.split('\n')[1]] = v.transactionKey;
     });
 
-    let chain = JSON.parse(fs.readFileSync(__dirname + '/../files/Blockchain.json', 'utf8'));
+    let chain = JSON.parse(fs.readFileSync(__dirname + '/../../files/AccessKey.json', 'utf8'));
 
     for (let i = 0; i < chain.length; i++) {
       if (keys[chain[i].transactionKey] !== undefined) {
@@ -458,7 +458,7 @@ class AccessKeyBlockManagement {
       keys[v.transactionKey.split('\n')[1]] = v.transactionKey;
     });
 
-    let chain = JSON.parse(fs.readFileSync(__dirname + '/../files/Blockchain.json', 'utf8'));
+    let chain = JSON.parse(fs.readFileSync(__dirname + '/../../files/AccessKey.json', 'utf8'));
 
     for (let i = 0; i < chain.length; i++) {
       if (keys[chain[i].transactionKey] !== undefined) {
@@ -510,7 +510,7 @@ class AccessKeyBlockManagement {
       keys[v.transactionKey.split('\n')[1]] = v.transactionKey;
     });
 
-    let chain = JSON.parse(fs.readFileSync(__dirname + '/../files/Blockchain.json', 'utf8'));
+    let chain = JSON.parse(fs.readFileSync(__dirname + '/../../files/AccessKey.json', 'utf8'));
 
     for (let i = 0; i < chain.length; i++) {
       if (keys[chain[i].transactionKey] !== undefined) {
@@ -615,7 +615,7 @@ class AccessKeyBlockManagement {
         fs.appendFileSync(__dirname + '/../../files/AccessKey.log', `복구된 출입키\n`, 'utf8');
         fs.appendFileSync(__dirname + '/../../files/AccessKey.log', `${JSON.parse(goodChain)[blockNum].transaction.accessKey}\n\n`, 'utf8');
 
-        fs.writeFileSync(__dirname + '/../files/Blockchain.json', jsonFormat(JSON.parse(goodChain)), 'utf8');
+        fs.writeFileSync(__dirname + '/../../files/AccessKey.json', jsonFormat(JSON.parse(goodChain)), 'utf8');
 
         cnt++;
       }

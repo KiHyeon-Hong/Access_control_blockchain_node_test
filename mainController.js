@@ -141,7 +141,7 @@ app.post('/reliabilityVerification', (req, res, next) => {
 });
 
 app.get('/getBlockchain', (req, res, next) => {
-  res.json(JSON.parse(fs.readFileSync(__dirname + '/AccessKeyBlockchain/files/Blockchain.json', 'utf8')));
+  res.json(JSON.parse(fs.readFileSync(__dirname + '/files/AccessKey.json', 'utf8')));
 });
 
 app.listen(65006, () => {

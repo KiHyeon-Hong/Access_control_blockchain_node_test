@@ -130,10 +130,6 @@ class AccessKeyInit {
    */
   createFiles() {
     fs.writeFileSync(__dirname + '/../files/Network.json', '[]\n', 'utf8');
-    // fs.writeFileSync(__dirname + '/../files/Blockchain.json', '[]\n', 'utf8');
-
-    // let chain = JSON.parse(fs.readFileSync(__dirname + '/../files/Blockchain_temp.json', 'utf8'));
-    // fs.writeFileSync(__dirname + '/../files/Blockchain.json', jsonFormat(chain), 'utf8');
 
     keyLog.writeAccessKeyLog('Info', 200, '출입키 블록체인 검증 모듈 파일 초기화 완료');
     return true;

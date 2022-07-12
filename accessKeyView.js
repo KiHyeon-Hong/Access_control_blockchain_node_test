@@ -54,7 +54,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/update', function (req, res) {
-  let chain = JSON.parse(fs.readFileSync(__dirname + '/AccessKeyBlockchain/files/Blockchain.json', 'utf8'));
+  let chain = JSON.parse(fs.readFileSync(__dirname + '/files/AccessKey.json', 'utf8'));
 
   res.render('update', {
     chain: { data: chain[req.query.accessKey], error: error[req.query.accessKey - 1] },
@@ -62,7 +62,7 @@ app.get('/update', function (req, res) {
 });
 
 app.get('/change', function (req, res) {
-  let chain = JSON.parse(fs.readFileSync(__dirname + '/AccessKeyBlockchain/files/Blockchain.json', 'utf8'));
+  let chain = JSON.parse(fs.readFileSync(__dirname + '/files/AccessKey.json', 'utf8'));
 
   let temp = chain[req.query.accessKey].transaction.accessKey;
 
@@ -85,7 +85,7 @@ app.get('/change', function (req, res) {
   fs.appendFileSync(__dirname + '/files/AccessKey.log', `위변조 출입키\n`, 'utf8');
   fs.appendFileSync(__dirname + '/files/AccessKey.log', `${req.query.change}\n`, 'utf8');
 
-  fs.writeFileSync(__dirname + '/AccessKeyBlockchain/files/Blockchain.json', jsonFormat(chain), 'utf8');
+  fs.writeFileSync(__dirname + '/files/AccessKey.json', jsonFormat(chain), 'utf8');
 
   cnt++;
 

@@ -35,7 +35,8 @@ let error = [
 fs.writeFileSync(__dirname + '/files/accessKey.log', '', 'utf8');
 
 rl.on('line', (data) => {
-  let chain = JSON.parse(fs.readFileSync(__dirname + '/AccessKeyBlockchain/files/Blockchain.json', 'utf8'));
+  // let chain = JSON.parse(fs.readFileSync(__dirname + '/AccessKeyBlockchain/files/Blockchain.json', 'utf8'));
+  let chain = JSON.parse(fs.readFileSync(__dirname + '/files/AccessKey.json', 'utf8'));
 
   let temp = chain[cnt + 1].transaction.accessKey;
 
@@ -52,7 +53,7 @@ rl.on('line', (data) => {
   fs.appendFileSync(__dirname + '/files/accessKey.log', `위변조 출입키\n`, 'utf8');
   fs.appendFileSync(__dirname + '/files/accessKey.log', `${error[cnt]}\n`, 'utf8');
 
-  fs.writeFileSync(__dirname + '/AccessKeyBlockchain/files/Blockchain.json', jsonFormat(chain), 'utf8');
+  fs.writeFileSync(__dirname + '/files/AccessKey.json', jsonFormat(chain), 'utf8');
 
   if (cnt === 19) {
     rl.close();

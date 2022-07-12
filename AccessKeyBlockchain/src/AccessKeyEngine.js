@@ -99,7 +99,7 @@ class AccessKeyEngine {
    * @return: true: Boolean
    */
   saveParticipationBlock(block) {
-    let chain = JSON.parse(fs.readFileSync(__dirname + '/../files/Blockchain.json', 'utf8'));
+    let chain = JSON.parse(fs.readFileSync(__dirname + '/../../files/AccessKey.json', 'utf8'));
     // chain.push(block);
     // fs.writeFileSync(__dirname + '/../files/Blockchain.json', jsonFormat(chain), 'utf8');
 
@@ -151,9 +151,9 @@ class AccessKeyEngine {
    * @return: true: Boolean
    */
   saveAccessKeyBlock(block) {
-    let chain = JSON.parse(fs.readFileSync(__dirname + '/../files/Blockchain.json', 'utf8'));
+    let chain = JSON.parse(fs.readFileSync(__dirname + '/../../files/AccessKey.json', 'utf8'));
     chain.push(block);
-    fs.writeFileSync(__dirname + '/../files/Blockchain.json', jsonFormat(chain), 'utf8');
+    fs.writeFileSync(__dirname + '/../../files/AccessKey.json', jsonFormat(chain), 'utf8');
 
     keyLog.writeAccessKeyLog('Info', 200, `출입키 블록 저장 완료`);
 
