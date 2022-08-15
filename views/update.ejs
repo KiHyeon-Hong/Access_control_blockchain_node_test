@@ -4,10 +4,19 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
   </head>
-  <body>
+  <body style="background-color:#DDDDDD;">
+    <h2 style="font-weight:bold;">위변조복구율 시험 프로그램</h2>
+    <hr>
     <form action="/change" method="get">
-      <textarea name="orig" readonly><%= chain.data.transaction.accessKey %></textarea>
-      <textarea name="change"><%= chain.error %></textarea>
+      <h4 style="font-weight:bold;">시험 출입키 데이터</h4>
+      <textarea rows="4" cols="80" name="orig" readonly><%= chain.data.transaction.accessKey %></textarea>
+      <br>
+      <br>
+
+      <h4 style="font-weight:bold;">위변조 출입키</h4>
+      <textarea rows="4" cols="80" name="change"><%= chain.error %></textarea>
+      <br>
+      <br>
 
       <input type="hidden" id="accessKey" name="accessKey" value=<%= chain.data.blockNumber %> >
       <input type="submit" value="위변조 시도" />

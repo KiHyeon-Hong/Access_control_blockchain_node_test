@@ -4,13 +4,17 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
   </head>
-  <body>
+  <body style="background-color:#DDDDDD;">
+    <h2 style="font-weight:bold;">위변조복구율 시험 프로그램</h2>
+    <hr>
     <% for(var i = 1; i < chain.data.length; i++){ %>
     <form action="/update" method="get">
-      <h4>시험 출입키 데이터 <%= i %></h4>
-      <div><%= chain.data[i].transaction.accessKey %></div>
+      <h4 style="font-weight:bold;">시험 출입키 데이터 <%= i %></h4>
+      <input readonly style="width:550px;" type="text" value=<%= chain.data[i].transaction.accessKey %> >
       <input type="hidden" id="accessKey" name="accessKey" value=<%= i %> >
       <input type="submit" value="위변조 시도" />
+      <br>
+      <br>
     </form>
     <% } %>
   </body>
