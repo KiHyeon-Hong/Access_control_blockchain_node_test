@@ -42,7 +42,7 @@ for (let i = 0; i < error.length; i++) {
   error[i] = error[i].split('\r')[0];
 }
 
-let tot = 100;
+let tot = 5;
 let cnt = 0;
 
 app.get('/', function (req, res) {
