@@ -1,8 +1,4 @@
 node_modules/
-AccessKeyBlockchain/keys/NetworkKey/NetworkDecryptKey.pem
-AccessKeyBlockchain/keys/NetworkKey/NetworkEncryptKey.pem
-AccessKeyBlockchain/keys/TransactionKey/TransactionDecryptKey.pem
-AccessKeyBlockchain/keys/TransactionKey/TransactionEncryptKey.pem
 AccessKeyBlockchain/files/Blockchain.json
 AccessKeyBlockchain/files/Blockchain.log
 AccessKeyBlockchain/files/Network.json
