@@ -145,6 +145,12 @@ app.get('/finish', function (req, res) {
   }, 5000);
 });
 
+app.get('/setBlockIntegrityTime', function (req, res) {
+  request.get(`http://localhost:65006/setBlockIntegrityTime?time=${req.query.time}`, (error, response, body) => {
+    res.redirect('/');
+  });
+});
+
 app.listen(65001, () => {
   // console.log('Server running...');
 });

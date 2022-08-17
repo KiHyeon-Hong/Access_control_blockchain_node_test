@@ -332,6 +332,10 @@ class AccessKeyBlockchain {
     return keyIntegrity.getBlockIntegrityTime();
   }
 
+  setBlockIntegrityTime(time) {
+    return keyIntegrity.setBlockIntegrityTime(time);
+  }
+
   getNetworkIntegrityTime() {
     return keyIntegrity.getNetworkIntegrityTime();
   }

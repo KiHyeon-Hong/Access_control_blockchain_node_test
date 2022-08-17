@@ -32,6 +32,12 @@ class AccessKeyIntegrity {
     return JSON.parse(fs.readFileSync(__dirname + '/../files/config.json', 'utf8')).blockIntegrity;
   }
 
+  setBlockIntegrityTime(time) {
+    let config = JSON.parse(fs.readFileSync(__dirname + '/../files/config.json', 'utf8'));
+    config.blockIntegrity = parseInt(time);
+    fs.writeFileSync(__dirname + '/../files/config.json', JSON.stringify(config), 'utf8');
+  }
+
   getNetworkIntegrityTime() {
     return JSON.parse(fs.readFileSync(__dirname + '/../files/config.json', 'utf8')).networkIntegrity;
   }

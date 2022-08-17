@@ -144,6 +144,10 @@ app.get('/getBlockchain', (req, res, next) => {
   res.json(JSON.parse(fs.readFileSync(__dirname + '/files/AccessKey.json', 'utf8')));
 });
 
+app.get('/setBlockIntegrityTime', (req, res, next) => {
+  res.send(blockchain.setBlockIntegrityTime(req.query.time));
+});
+
 app.listen(65006, () => {
   blockchain.accessKeyInit();
   console.log(`출입키 블록체인 네트워크가 ${blockchain.address()}:65006에서 동작 중...`);

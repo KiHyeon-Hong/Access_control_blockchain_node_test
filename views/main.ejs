@@ -6,6 +6,10 @@
   </head>
   <body style="background-color:#DDDDDD;">
     <h2 style="font-weight:bold;">위변조복구율 시험 프로그램</h2>
+    <form action="/setBlockIntegrityTime" method="get">
+      <input type="text" id="time" name="time">
+      <input type="submit" value="동기화 시간 변경" />
+    </form>
     <hr>
     <% for(var i = 1; i < chain.data.length; i++){ %>
     <form action="/update" method="get">
